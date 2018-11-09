@@ -192,6 +192,9 @@ public class MainController implements Initializable {
         Inventory.allParts.add(0, inhouse1);
         Inventory.allParts.add(1, inhouse2);
         Inventory.allParts.add(2, outsourced1);
+        
+        
+        
         active = true;
         }
         partsTable.setItems(Inventory.getAllParts());

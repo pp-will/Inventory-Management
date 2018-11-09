@@ -63,7 +63,7 @@ public class Product {
         return max;
     }
     //addAssociatedPart ***NEEDS WORK
-    public void addAssociatedPart(int partID) {
+    public void addAssociatedPart(Part part) {
         
     }
     //WORK

@@ -19,12 +19,14 @@ public class Inventory {
     private static int productID;
     private static int partID;
     private static Part part;
+    private static Product product;
     public static void addProduct(Product product) {
-        
+        products.add(product);
     }
     
-    public static boolean removeProduct(int productID) {
-        
+    public static boolean removeProduct(Product product) {
+        Inventory.product = product;
+        products.remove(product);
         return true;
     }
     
@@ -44,6 +46,10 @@ public class Inventory {
     
     public static void updatePart(int partID) {
         Inventory.partID = partID;
+        
+    }
+    
+    public static void lookupPart(int partID) {
         
     }
     

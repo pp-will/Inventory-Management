@@ -166,32 +166,39 @@ public class AddPartController implements Initializable {
             partId = id[random.nextInt(id.length)];
             if(max < min) {
                 errorLabel.setText("max must be greater than min");
-            }
+            } else if (inventory < min || inventory > max || inventory < min && inventory > max){
+                errorLabel.setText("inventory must be between max and min");
+            } else {
             
             int machineID = parseInt(variableField.getText());
             
            Inhouse inhouse = new Inhouse(partId, partName, price, inventory, min, max, machineID);
            Inventory.addPart(inhouse);
-           inhouse.getPartID();
-           inhouse.getName();
-           inhouse.getPrice();
-           inhouse.getInStock();
-           inhouse.getMin();
-           inhouse.getMax();
-           
-           
+           if(conf.isPresent() && conf.get() == ButtonType.OK) {
+                
+                Stage stage;
+                Parent root;
+                stage = (Stage) addPartSaveBtn.getScene().getWindow();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("Main.fxml"));
+                root = loader.load();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            }
+           } 
         } else if (outsourcedRadio.isSelected()) {
             partId = id[random.nextInt(id.length)];
-            if(max < min) {
-                errorLabel.setText("max must be less than min");
-            }
+            
             String companyName = variableField.getText();
+            if(max < min) {
+                errorLabel.setText("max must be greater than min");
+            } else if (inventory < min || inventory > max || inventory < min && inventory > max){
+                errorLabel.setText("inventory must be between max and min");
+            } else {
             Outsourced outsourced = new Outsourced(partId, partName, price, inventory, min, max, companyName);
             Inventory.addPart(outsourced);
-            
-        }
-        //show confirmation dialog
-        if(conf.isPresent() && conf.get() == ButtonType.OK) {
+            if(conf.isPresent() && conf.get() == ButtonType.OK) {
+                
                Stage stage;
             Parent root;
             stage = (Stage) addPartSaveBtn.getScene().getWindow();
@@ -201,11 +208,15 @@ public class AddPartController implements Initializable {
             stage.setScene(scene);
             stage.show();
     }
+            }
+        }
+        
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+    
     
 }

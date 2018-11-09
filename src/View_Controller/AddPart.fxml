@@ -145,7 +145,7 @@
                   <TextField fx:id="partMinField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <TextField fx:id="partMaxField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                   <TextField fx:id="variableField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                  <Label fx:id="errorLabel" textFill="#f60303" GridPane.rowIndex="7" />
+                  <Label fx:id="errorLabel" textFill="#f60303" GridPane.columnSpan="3" GridPane.rowIndex="7" />
                </children>
             </GridPane>
          </center>

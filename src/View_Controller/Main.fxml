@@ -97,7 +97,7 @@
                   </GridPane>
                </top>
                <center>
-                  <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                  <TableView fx:id="productsTable" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                     <columns>
                       <TableColumn prefWidth="69.0" text="Product ID" />
                       <TableColumn prefWidth="114.0" text="Product Name" />
