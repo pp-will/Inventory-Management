@@ -20,7 +20,15 @@ public class Product {
     private int inStock;
     private int min, max;
     
-    
+    public Product(int productID, String name, double price, int inStock, int min, int max, ObservableList associatedParts) {
+        this.productID = productID;
+        this.name = name;
+        this.price = price;
+        this.inStock = inStock;
+        this.min = min;
+        this.max = max;
+        this.associatedParts = associatedParts;
+    }
     
     //name
     public void setName(String name) {

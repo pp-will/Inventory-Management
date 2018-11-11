@@ -92,17 +92,17 @@
                            </GridPane.margin>
                         </Label>
                         <Button fx:id="productSearchBtn" mnemonicParsing="false" text="Search" GridPane.columnIndex="1" />
-                        <TextField alignment="CENTER_RIGHT" promptText="..." GridPane.columnIndex="2" />
+                        <TextField fx:id="productSearchField" alignment="CENTER_RIGHT" promptText="..." GridPane.columnIndex="2" />
                      </children>
                   </GridPane>
                </top>
                <center>
                   <TableView fx:id="productsTable" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                     <columns>
-                      <TableColumn prefWidth="69.0" text="Product ID" />
-                      <TableColumn prefWidth="114.0" text="Product Name" />
-                        <TableColumn prefWidth="112.0" text="Inventory Level" />
-                        <TableColumn prefWidth="104.0" text="Price Per Unit" />
+                      <TableColumn fx:id="productIDColumn" prefWidth="69.0" text="Product ID" />
+                      <TableColumn fx:id="productNameColumn" prefWidth="114.0" text="Product Name" />
+                        <TableColumn fx:id="productInvColumn" prefWidth="112.0" text="Inventory Level" />
+                        <TableColumn fx:id="productPriceColumn" prefWidth="104.0" text="Price Per Unit" />
                     </columns>
                   </TableView>
                </center>

@@ -9,11 +9,13 @@ import Model.Inhouse;
 import Model.Inventory;
 import Model.Outsourced;
 import Model.Part;
+import Model.Product;
 import java.io.IOException;
 import static java.lang.Integer.parseInt;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -73,6 +75,24 @@ public class MainController implements Initializable {
 
     @FXML
     private Button productSearchBtn;
+    
+    @FXML
+    private TextField productSearchField;
+
+    @FXML
+    private TableView<Product> productsTable;
+
+    @FXML
+    private TableColumn<Product, Integer> productIDColumn;
+
+    @FXML
+    private TableColumn<Product, String> productNameColumn;
+
+    @FXML
+    private TableColumn<Product, Integer> productInvColumn;
+
+    @FXML
+    private TableColumn<Product, Double> productPriceColumn;
 
     @FXML
     private Button partsAddBtn;
@@ -186,13 +206,50 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         if(!active) {
-        Inhouse inhouse1 = new Inhouse(0, "Part 1", 1.99, 5, 1, 8, 123);
-        Inhouse inhouse2 = new Inhouse(1, "Part 2", 2.50, 7, 2, 6, 1232);
-        Outsourced outsourced1 = new Outsourced(2, "Part 3", 4.99, 3, 1, 9, "Parts Inc.");
+        Inhouse inhouse1 = new Inhouse(0, "Tires", 1.99, 5, 1, 8, 123);
+        Inhouse inhouse2 = new Inhouse(1, "Seat", 2.50, 7, 2, 6, 1232);
+        Inhouse inhouse3 = new Inhouse(2, "Handlebars", 3.99, 4, 3, 7, 4324);
+        
+        Outsourced outsourced1 = new Outsourced(3, "Wheels", 4.99, 3, 1, 9, "Parts Inc.");
+        Outsourced outsourced2 = new Outsourced(4, "Deck", 3.50, 3, 2, 6, "Parts Inc.");
+        Outsourced outsourced3 = new Outsourced(5, "Trucks", 6.00, 4, 3, 9, "Parts Inc");
+        
+        Inhouse inhouse4 = new Inhouse(6, "Spring", 0.99, 5, 2, 10, 534);
+        Inhouse inhouse5 = new Inhouse(7, "Pogo Body", 5.00, 4, 1, 6, 5883);
+        
         Inventory.allParts.add(0, inhouse1);
         Inventory.allParts.add(1, inhouse2);
-        Inventory.allParts.add(2, outsourced1);
+        Inventory.allParts.add(2, inhouse3);
+        Inventory.allParts.add(3, outsourced1);
+        Inventory.allParts.add(4, outsourced2);
+        Inventory.allParts.add(5, outsourced3);
+        Inventory.allParts.add(6, inhouse4);
+        Inventory.allParts.add(7, inhouse5);
         
+        //building ObservableLists for Products
+        ObservableList<Part> prod1 = FXCollections.observableArrayList();
+        ObservableList<Part> prod2 = FXCollections.observableArrayList();
+        ObservableList<Part> prod3 = FXCollections.observableArrayList();
+        
+        //add parts to list
+        prod1.add(0, inhouse1);
+        prod1.add(1, inhouse2);
+        prod1.add(2, inhouse3);
+        prod2.add(0, outsourced1);
+        prod2.add(1, outsourced2);
+        prod2.add(2, outsourced3);
+        prod3.add(0, inhouse3);
+        prod3.add(1, inhouse4);
+        prod3.add(2, inhouse5);
+        
+        //initialize product
+        Product product1 = new Product(0, "Bike", 40.00, 6, 1, 9, prod1);
+        Product product2 = new Product(1, "Skateboard", 20.00, 7, 1, 7, prod2);
+        Product product3 = new Product(2, "Pogo Stick", 30.00, 4, 1, 8, prod3);
+        
+        Inventory.products.add(0, product1);
+        Inventory.products.add(1, product2);
+        Inventory.products.add(2, product3);
         
         
         active = true;
@@ -203,7 +260,11 @@ public class MainController implements Initializable {
         invLevelColumn.setCellValueFactory(new PropertyValueFactory<>("inStock"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("Price"));
         
-        
+        productsTable.setItems(Inventory.getAllProducts());
+        productIDColumn.setCellValueFactory(new PropertyValueFactory<>("productID"));
+        productNameColumn.setCellValueFactory(new PropertyValueFactory<>("Name"));
+        productInvColumn.setCellValueFactory(new PropertyValueFactory<>("inStock"));
+        productPriceColumn.setCellValueFactory(new PropertyValueFactory<>("Price"));
         
     }    
     

@@ -44,6 +44,10 @@ public class Inventory {
         return allParts;
     }
     
+    public static ObservableList<Product> getAllProducts() {
+        return products;
+    }
+    
     public static void updatePart(int partID) {
         Inventory.partID = partID;
         
