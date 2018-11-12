@@ -91,7 +91,7 @@
                               <Insets left="10.0" />
                            </GridPane.margin>
                         </Label>
-                        <Button fx:id="productSearchBtn" mnemonicParsing="false" text="Search" GridPane.columnIndex="1" />
+                        <Button fx:id="productSearchBtn" mnemonicParsing="false" onAction="#productSearchBtnHandler" text="Search" GridPane.columnIndex="1" />
                         <TextField fx:id="productSearchField" alignment="CENTER_RIGHT" promptText="..." GridPane.columnIndex="2" />
                      </children>
                   </GridPane>
@@ -118,7 +118,7 @@
               <buttons>
                 <Button fx:id="productsAddBtn" mnemonicParsing="false" onAction="#productsAddBtnHandler" text="Add" />
                   <Button fx:id="productsModifyBtn" mnemonicParsing="false" text="Modify" />
-                  <Button fx:id="productsDeleteBtn" mnemonicParsing="false" text="Delete" />
+                  <Button fx:id="productsDeleteBtn" mnemonicParsing="false" onAction="#productsDeleteBtnHandler" text="Delete" />
               </buttons>
             </ButtonBar>
             <Button fx:id="exitBtn" layoutX="934.0" layoutY="561.0" mnemonicParsing="false" onAction="#onExitBtnHandler" text="Exit" textFill="#dd1111" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">

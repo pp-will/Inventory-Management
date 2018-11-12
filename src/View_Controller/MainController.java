@@ -162,6 +162,11 @@ public class MainController implements Initializable {
     }
     
     @FXML
+    void productsDeleteBtnHandler(ActionEvent event) {
+        deleteProduct();
+    }
+    
+    @FXML
     void partsSearchBtnHandler(ActionEvent event) {
         ObservableList<Part> data = partsTable.getItems();
         boolean present = false;
@@ -197,6 +202,47 @@ public class MainController implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Part Not Found");
                     alert.setHeaderText("The part you searched for was not found");
+                    alert.getDialogPane().setPrefSize(350, 200);
+                    alert.showAndWait();
+            }
+        }
+    }
+    
+    @FXML
+    void productSearchBtnHandler(ActionEvent event) {
+        ObservableList<Product> data = productsTable.getItems();
+        boolean present = false;
+        String productString = productSearchField.getText();
+        try {
+            int productNum = Integer.parseInt(productString);
+            for(Product p : data) {
+                if(p.getProductID() == productNum) {
+                    productsTable.getSelectionModel().select(p);
+                    present = true;
+                }
+            }
+            
+            if(present == false) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Product Not Found");
+                    alert.setHeaderText("The product you searched for was not found");
+                    alert.getDialogPane().setPrefSize(350, 200);
+                    alert.showAndWait();
+            }
+        } catch (NumberFormatException e) {
+            for(Product p : data) {
+                productString = productString.toLowerCase();
+                String productName = p.getName().toLowerCase();
+                if(productName.equals(productString)) {
+                    productsTable.getSelectionModel().select(p);
+                    present = true;
+                }
+            }
+            
+            if(present == false) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Product Not Found");
+                    alert.setHeaderText("The product you searched for was not found");
                     alert.getDialogPane().setPrefSize(350, 200);
                     alert.showAndWait();
             }
@@ -290,6 +336,15 @@ public class MainController implements Initializable {
             priceColumn.setCellValueFactory(new PropertyValueFactory<>("Price"));
             
             partsTable.setItems(data);
+    }
+    
+    public void deleteProduct() {
+        ObservableList<Product> data = productsTable.getItems();
+        data.remove(productsTable.getSelectionModel().getSelectedItem());
+            productIDColumn.setCellValueFactory(new PropertyValueFactory<>("productID"));
+            productNameColumn.setCellValueFactory(new PropertyValueFactory<>("Name"));
+            productInvColumn.setCellValueFactory(new PropertyValueFactory<>("inStock"));
+            productPriceColumn.setCellValueFactory(new PropertyValueFactory<>("Price"));
     }
     
 }
