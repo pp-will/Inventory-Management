@@ -203,6 +203,19 @@ public class MainController implements Initializable {
         }
     }
     
+    @FXML
+    void productsAddBtnHandler(ActionEvent event) throws IOException {
+        Stage stage;
+        Parent root;
+        stage = (Stage) productsAddBtn.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AddProduct.fxml"));
+        root = loader.load();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        AddProductController controller = loader.getController();
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         if(!active) {

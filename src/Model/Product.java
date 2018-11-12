@@ -13,7 +13,7 @@ import javafx.collections.ObservableList;
  * @author wpittman
  */
 public class Product {
-    ObservableList<Part> associatedParts = FXCollections.observableArrayList();
+    private ObservableList<Part> associatedParts = FXCollections.observableArrayList();
     private int productID;
     private String name;
     private double price;
@@ -29,6 +29,8 @@ public class Product {
         this.max = max;
         this.associatedParts = associatedParts;
     }
+    
+   
     
     //name
     public void setName(String name) {

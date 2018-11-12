@@ -116,7 +116,7 @@
             </ButtonBar>
             <ButtonBar layoutX="648.0" layoutY="500.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.rightAnchor="87.0">
               <buttons>
-                <Button fx:id="productsAddBtn" mnemonicParsing="false" text="Add" />
+                <Button fx:id="productsAddBtn" mnemonicParsing="false" onAction="#productsAddBtnHandler" text="Add" />
                   <Button fx:id="productsModifyBtn" mnemonicParsing="false" text="Modify" />
                   <Button fx:id="productsDeleteBtn" mnemonicParsing="false" text="Delete" />
               </buttons>

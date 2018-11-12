@@ -141,7 +141,7 @@ public class AddPartController implements Initializable {
         Alert confirm = new Alert(AlertType.CONFIRMATION);
         confirm.setTitle("Add Part");
         confirm.setHeaderText("This part will be added");
-        confirm.setContentText("Are you sure?");
+        confirm.setContentText("Press OK to save");
         confirm.getDialogPane().setPrefSize(350, 200);
         Optional<ButtonType> conf = confirm.showAndWait();
         
