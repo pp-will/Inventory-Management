@@ -115,7 +115,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button fx:id="addProductSearchBtn" alignment="CENTER_RIGHT" mnemonicParsing="false" text="Search">
+                        <Button fx:id="addProductSearchBtn" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#addProductSearchBtnHandler" text="Search">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>

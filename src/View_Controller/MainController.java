@@ -157,6 +157,22 @@ public class MainController implements Initializable {
        }
     
     @FXML
+    void productsModifyBtnHandler(ActionEvent event) throws IOException {
+        Stage stage;
+        Parent root;
+        stage = (Stage) productsModifyBtn.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifyProduct.fxml"));
+        root = loader.load();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        ModifyProductController controller = loader.getController();
+        Product product = productsTable.getSelectionModel().getSelectedItem();
+        controller.setProduct(product);
+        deleteProduct();
+    }
+    
+    @FXML
     void partsDeleteBtnHandler(ActionEvent event) {
         delete();
     }

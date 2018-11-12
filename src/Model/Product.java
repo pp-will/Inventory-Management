@@ -49,7 +49,7 @@ public class Product {
         return price;
     }
     //inStock
-    public void inStock(int inStock) {
+    public void setInStock(int inStock) {
         this.inStock = inStock;
     }
     
@@ -74,7 +74,7 @@ public class Product {
     }
     //addAssociatedPart ***NEEDS WORK
     public void addAssociatedPart(Part part) {
-        
+        associatedParts.add(part);
     }
     //WORK
     public boolean removeAssociatedPart(int partID) {
@@ -83,6 +83,10 @@ public class Product {
     //WORK
     public Part lookupAssociatedPart(int partID) {
         return (Part) associatedParts;
+    }
+    
+    public ObservableList<Part> getAssociatedParts() {
+        return associatedParts;
     }
     
     //productID

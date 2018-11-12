@@ -119,6 +119,9 @@ public class ModifyPartController implements Initializable {
             if(this.part instanceof Inhouse) {
                 tempIn = (Inhouse)this.part;
                 setPart(tempIn);
+            } else if(this.part instanceof Outsourced) {
+                tempOut = (Outsourced)this.part;
+                setPart(tempOut);
             }
             alert.close();
            
