@@ -96,12 +96,16 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField editable="false" promptText="AUTO GENERATED" GridPane.columnIndex="1" />
                   <TextField fx:id="productNameField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <TextField fx:id="productInvField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <TextField fx:id="productPriceField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <TextField fx:id="productMinField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <TextField fx:id="productMaxField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Label text="AUTO GENERATED" GridPane.columnIndex="1">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
                </children>
             </GridPane>
             <BorderPane layoutX="428.0" layoutY="42.0" prefHeight="238.0" prefWidth="557.0" AnchorPane.bottomAnchor="320.0" AnchorPane.leftAnchor="430.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="40.0">

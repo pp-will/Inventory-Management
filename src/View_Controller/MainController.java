@@ -174,12 +174,31 @@ public class MainController implements Initializable {
     
     @FXML
     void partsDeleteBtnHandler(ActionEvent event) {
-        delete();
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Warning");
+        alert.setHeaderText("You are about to delete a part");
+        alert.setContentText("Press OK to delete part");
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.isPresent() && result.get() == ButtonType.OK) {
+            delete();
+        }else {
+            alert.close();
+        }
+        
     }
     
     @FXML
     void productsDeleteBtnHandler(ActionEvent event) {
-        deleteProduct();
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Warning");
+        alert.setHeaderText("You are about to delete a product");
+        alert.setContentText("Press OK to delete product");
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.isPresent() && result.get() == ButtonType.OK) {
+            deleteProduct();
+        }else {
+            alert.close();
+        }
     }
     
     @FXML

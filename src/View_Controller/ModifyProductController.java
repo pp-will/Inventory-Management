@@ -128,11 +128,13 @@ public class ModifyProductController implements Initializable {
 
     @FXML
     private Button productAddDeleteBtn;
+    
     private Product product;
     ObservableList<Part> tempList = FXCollections.observableArrayList();
     private String name;
     private int id, inStock, min, max;
     private double price;
+    private double tempPrice;
     
     @FXML
     void modifyProductSearchBtnHandler(ActionEvent event) {
@@ -300,6 +302,23 @@ public class ModifyProductController implements Initializable {
             }
         }
         
+        
+        tempList = product.getAssociatedParts();
+        
+        for(Part p : tempList) {
+            tempPrice += p.getPrice();
+        }
+        
+        if(price < tempPrice) {
+            alert.setHeaderText("The price of the product must be greater than the price of the parts");
+            alert.setContentText("Price of the parts is $" + tempPrice);
+            Optional<ButtonType> alertOK = alert.showAndWait();
+            if(alertOK.isPresent() && alertOK.get() == ButtonType.OK) {
+                alert.close();
+            }
+        } else {
+        
+        
         if(max < min) {
             alert.setHeaderText("Max must greater than min");
             Optional<ButtonType> alertOK = alert.showAndWait();
@@ -326,6 +345,7 @@ public class ModifyProductController implements Initializable {
             } else {
                 confirm.close();
             }
+        }
         }
     }
     @Override

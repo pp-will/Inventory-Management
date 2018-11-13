@@ -129,6 +129,8 @@ public class AddProductController implements Initializable {
     private int inStock;
     private double price;
     private int min, max;
+    private double tempPrice;
+    private Product product;
     
     ObservableList<Part> tempList = FXCollections.observableArrayList();
     
@@ -210,7 +212,7 @@ public class AddProductController implements Initializable {
         //ensure productPrice is a double
         try {
             price = parseDouble(productPriceField.getText());
-            
+            //product.setPrice(price);
         } catch (NumberFormatException e) {
             alert.setHeaderText("Price must be in the following format:");
             alert.setContentText("X.XX");
@@ -224,6 +226,7 @@ public class AddProductController implements Initializable {
         //ensure productInv is an int
         try {
             inStock = parseInt(productInvField.getText());
+            //product.setInStock(inStock);
         } catch (NumberFormatException e) {
             alert.setHeaderText("Inventory must be a number");
             Optional<ButtonType> alertOK = alert.showAndWait();
@@ -235,6 +238,7 @@ public class AddProductController implements Initializable {
         //ensure min is an int
         try {
             min = parseInt(productMinField.getText());
+            //product.setMin(min);
         } catch (NumberFormatException e) {
             alert.setHeaderText("Min must be a number");
             Optional<ButtonType> alertOK = alert.showAndWait();
@@ -246,7 +250,7 @@ public class AddProductController implements Initializable {
         //ensure max is an int
         try {
             max = parseInt(productMaxField.getText());
-            
+            //product.setMax(max);
         } catch (NumberFormatException e) {
             alert.setHeaderText("Max must be a number");
             Optional<ButtonType> alertOK = alert.showAndWait();
@@ -269,8 +273,24 @@ public class AddProductController implements Initializable {
             }
         } else {
             int productID = id[random.nextInt(id.length)];
+            //product.setProductID(productID);
+            for(Part p : tempList) {
+                tempPrice += p.getPrice();
+                //this.product.addAssociatedPart(p);
+                
+            }
+            if(tempPrice > price) {
+                alert.setHeaderText("The price of the product must be greater than the price of the parts");
+            alert.setContentText("Price of the parts is $" + tempPrice);
+            Optional<ButtonType> alertOK = alert.showAndWait();
+            if(alertOK.isPresent() && alertOK.get() == ButtonType.OK) {
+                alert.close();
+            }
+            } else {
+            
             
             Product product = new Product(productID, name, price, inStock, min, max, tempList);
+            
             Inventory.addProduct(product);
             if(conf.isPresent() && conf.get() == ButtonType.OK) {
                 
@@ -287,7 +307,7 @@ public class AddProductController implements Initializable {
             }
             
         }
-        
+        }
     }
     
     @FXML
