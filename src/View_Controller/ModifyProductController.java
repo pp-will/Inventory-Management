@@ -325,7 +325,14 @@ public class ModifyProductController implements Initializable {
             if(alertOK.isPresent() && alertOK.get() == ButtonType.OK) {
                 alert.close();
             }
-        } else if (inStock < min || inStock > max || inStock < min && inStock > max) {
+        } else if(tempList.isEmpty()) {
+            alert.setHeaderText("A product must contain parts");
+            alert.setContentText("Please add some parts");
+            Optional<ButtonType> alertOK = alert.showAndWait();
+            if(alertOK.isPresent() && alertOK.get() == ButtonType.OK) {
+                alert.close();
+            }
+            } else if (inStock < min || inStock > max || inStock < min && inStock > max) {
             alert.setHeaderText("Inventory must be greater than min, and less than max");
             Optional<ButtonType> alertOK = alert.showAndWait();
             if(alertOK.isPresent() && alertOK.get() == ButtonType.OK) {

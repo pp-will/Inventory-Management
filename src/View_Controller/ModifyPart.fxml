@@ -147,6 +147,11 @@
                   <TextField fx:id="variableField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                   <Label fx:id="errorLabel" textFill="#f60303" GridPane.rowIndex="7" />
                   <Label fx:id="partIDLabel" GridPane.columnIndex="1" />
+                  <Label fx:id="partIDLabel" GridPane.columnIndex="1">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
                </children>
             </GridPane>
          </center>

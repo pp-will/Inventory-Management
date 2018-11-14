@@ -79,6 +79,10 @@ public class AddPartController implements Initializable {
     private Label errorLabel;
     
     public int partId;
+    private String partName;
+    private double price;
+    private int inventory, min, max, machineID;
+    
 
     @FXML
     void addPartCancelBtnHandler(ActionEvent event) throws IOException {
@@ -150,27 +154,87 @@ public class AddPartController implements Initializable {
         for(int i = 0; i < id.length; i++) {
             id[i] = random.nextInt(1000);
         }
-        String partName = partNameField.getText();
-        double price = parseDouble(partPriceField.getText());
-        int inventory = parseInt(partInvField.getText());
-        int min = parseInt(partMinField.getText());
-        int max = parseInt(partMaxField.getText());
         
         //alert dialog if exception
         Alert alert = new Alert(AlertType.WARNING);
         alert.setTitle("Warning!");
-        alert.setHeaderText("Your entry is not valid");
-        //alert.setContentText needs to be set
+        
+        partName = partNameField.getText();
+        try {
+            price = parseDouble(partPriceField.getText());
+        } catch (NumberFormatException e) {
+            alert.setHeaderText("Price must be in the following format:");
+            alert.setContentText("X.XX");
+            Optional<ButtonType> alertOK = alert.showAndWait();
+            if(alertOK.isPresent() && alertOK.get() == ButtonType.OK) {
+                alert.close();
+            }
+        }
+        
+        try {
+            inventory = parseInt(partInvField.getText());
+        } catch (NumberFormatException e) {
+            alert.setHeaderText("Inventory must be an integer");
+            
+            Optional<ButtonType> alertOK = alert.showAndWait();
+            if(alertOK.isPresent() && alertOK.get() == ButtonType.OK) {
+                alert.close();
+            }
+        }
+        
+        try {
+            min = parseInt(partMinField.getText());
+        } catch (NumberFormatException e) {
+            alert.setHeaderText("Min must be an integer");
+            
+            Optional<ButtonType> alertOK = alert.showAndWait();
+            if(alertOK.isPresent() && alertOK.get() == ButtonType.OK) {
+                alert.close();
+            }
+        }
+        
+        try {
+            max = parseInt(partMaxField.getText());
+        } catch (NumberFormatException e) {
+            alert.setHeaderText("Max must be an integer");
+            
+            Optional<ButtonType> alertOK = alert.showAndWait();
+            if(alertOK.isPresent() && alertOK.get() == ButtonType.OK) {
+                alert.close();
+            }
+        }
         
         if(inhouseRadio.isSelected()) {
             partId = id[random.nextInt(id.length)];
             if(max < min) {
-                errorLabel.setText("max must be greater than min");
+                //errorLabel.setText("max must be greater than min");
+                alert.setHeaderText("Max must be greater than min");
+            
+            Optional<ButtonType> alertOK = alert.showAndWait();
+            if(alertOK.isPresent() && alertOK.get() == ButtonType.OK) {
+                alert.close();
+            }
             } else if (inventory < min || inventory > max || inventory < min && inventory > max){
-                errorLabel.setText("inventory must be between max and min");
+                //errorLabel.setText("inventory must be between max and min");
+                alert.setHeaderText("Inventory must be between min and max");
+            
+            Optional<ButtonType> alertOK = alert.showAndWait();
+            if(alertOK.isPresent() && alertOK.get() == ButtonType.OK) {
+                alert.close();
+            }
             } else {
             
-            int machineID = parseInt(variableField.getText());
+            try {
+               machineID = parseInt(variableField.getText()); 
+            } catch (NumberFormatException e) {
+                alert.setHeaderText("Machine ID must be an integer");
+            
+            Optional<ButtonType> alertOK = alert.showAndWait();
+            if(alertOK.isPresent() && alertOK.get() == ButtonType.OK) {
+                alert.close();
+            }
+            }
+            
             
            Inhouse inhouse = new Inhouse(partId, partName, price, inventory, min, max, machineID);
            Inventory.addPart(inhouse);
@@ -191,9 +255,21 @@ public class AddPartController implements Initializable {
             
             String companyName = variableField.getText();
             if(max < min) {
-                errorLabel.setText("max must be greater than min");
+                //errorLabel.setText("max must be greater than min");
+                alert.setHeaderText("Max must be greater than min");
+            
+            Optional<ButtonType> alertOK = alert.showAndWait();
+            if(alertOK.isPresent() && alertOK.get() == ButtonType.OK) {
+                alert.close();
+            }
             } else if (inventory < min || inventory > max || inventory < min && inventory > max){
-                errorLabel.setText("inventory must be between max and min");
+                //errorLabel.setText("inventory must be between max and min");
+                alert.setHeaderText("Inventory must be between min and max");
+            
+            Optional<ButtonType> alertOK = alert.showAndWait();
+            if(alertOK.isPresent() && alertOK.get() == ButtonType.OK) {
+                alert.close();
+            }
             } else {
             Outsourced outsourced = new Outsourced(partId, partName, price, inventory, min, max, companyName);
             Inventory.addPart(outsourced);
@@ -216,6 +292,8 @@ public class AddPartController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        inhouseRadio.setSelected(true);
+        variableLabel.setText("Machine ID");
     }    
     
     
