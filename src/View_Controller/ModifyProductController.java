@@ -313,6 +313,7 @@ public class ModifyProductController implements Initializable {
             alert.setHeaderText("The price of the product must be greater than the price of the parts");
             alert.setContentText("Price of the parts is $" + tempPrice);
             Optional<ButtonType> alertOK = alert.showAndWait();
+            tempPrice = 0;
             if(alertOK.isPresent() && alertOK.get() == ButtonType.OK) {
                 alert.close();
             }

@@ -221,14 +221,20 @@ public class ModifyPartController implements Initializable {
             }
             if(max < min) {
                 errorLabel.setText("max must be greater than min");
-            }else if (inventory < min || inventory > max || inventory < min && inventory > max) {
+            } else if (inventory < min || inventory > max || inventory < min && inventory > max) {
             alert.setHeaderText("Inventory must be greater than min, and less than max");
             Optional<ButtonType> alertOK = alert.showAndWait();
             if(alertOK.isPresent() && alertOK.get() == ButtonType.OK) {
                 alert.close();
             }
             
-        } 
+        } else {
+                alert.setHeaderText("Error:");
+            Optional<ButtonType> alertOK = alert.showAndWait();
+            if(alertOK.isPresent() && alertOK.get() == ButtonType.OK) {
+                alert.close();
+            }
+            } 
             }else if (outsourcedRadio.isSelected()) {
             variableLabel.setText("Company Name");
             if(max < min) {
