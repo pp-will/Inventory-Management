@@ -13,6 +13,7 @@ import Model.Product;
 import java.io.IOException;
 import static java.lang.Integer.parseInt;
 import java.net.URL;
+import java.util.ConcurrentModificationException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -116,7 +117,7 @@ public class MainController implements Initializable {
     private Button exitBtn;
     
     static boolean active;
-    
+    Product product;
     //reference tables
     
     @FXML
@@ -141,6 +142,13 @@ public class MainController implements Initializable {
     
     @FXML
     void partsModifyBtnHandler(ActionEvent event) throws IOException {
+        Part part = partsTable.getSelectionModel().getSelectedItem();
+        if(part == null) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setContentText("You must select a part to modify");
+            alert.showAndWait();
+            alert.close();
+        } else {
         Stage stage; 
         Parent root;       
         stage=(Stage) partsModifyBtn.getScene().getWindow();
@@ -151,13 +159,23 @@ public class MainController implements Initializable {
         stage.setScene(scene);
         stage.show();
         ModifyPartController controller = loader.getController();
-        Part part = partsTable.getSelectionModel().getSelectedItem();
+        
         controller.setPart(part);
         delete();
+        }
        }
     
     @FXML
     void productsModifyBtnHandler(ActionEvent event) throws IOException {
+        Product product = productsTable.getSelectionModel().getSelectedItem();
+        if(product == null) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setContentText("You must select a product to modify");
+            alert.showAndWait();
+            alert.close();
+        } else {
+            
+        
         Stage stage;
         Parent root;
         stage = (Stage) productsModifyBtn.getScene().getWindow();
@@ -167,9 +185,10 @@ public class MainController implements Initializable {
         stage.setScene(scene);
         stage.show();
         ModifyProductController controller = loader.getController();
-        Product product = productsTable.getSelectionModel().getSelectedItem();
+        
         controller.setProduct(product);
         deleteProduct();
+        }
     }
     
     @FXML
@@ -189,16 +208,13 @@ public class MainController implements Initializable {
     
     @FXML
     void productsDeleteBtnHandler(ActionEvent event) {
-        Alert alert = new Alert(AlertType.CONFIRMATION);
+        Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Warning");
-        alert.setHeaderText("You are about to delete a product");
-        alert.setContentText("Press OK to delete product");
-        Optional<ButtonType> result = alert.showAndWait();
-        if(result.isPresent() && result.get() == ButtonType.OK) {
-            deleteProduct();
-        }else {
-            alert.close();
-        }
+        alert.setHeaderText("You cannot delete a product");
+        alert.showAndWait();
+        alert.close();
+        
+        
     }
     
     @FXML

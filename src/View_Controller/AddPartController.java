@@ -15,6 +15,8 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.Random;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,6 +30,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
@@ -77,7 +80,7 @@ public class AddPartController implements Initializable {
     
     @FXML
     private Label errorLabel;
-    
+    static boolean active = true;
     public int partId;
     private String partName;
     private double price;
@@ -122,18 +125,23 @@ public class AddPartController implements Initializable {
     
     @FXML
     void toggleSwitch(ActionEvent event) {
+        
         ToggleGroup group = new ToggleGroup();
         inhouseRadio.setToggleGroup(group);
+        inhouseRadio.setUserData("Machine ID");
         outsourcedRadio.setToggleGroup(group);
-        
+        outsourcedRadio.setUserData("Company Name");
+       
         inhouseRadio.selectedProperty().addListener((observable, wasSelected, isSelected) -> {
            if(isSelected) {
                variableLabel.setText("Machine ID");
+               System.out.println("machine");
            } 
         });
         outsourcedRadio.selectedProperty().addListener((observable, wasSelected, isSelected) -> {
            if(isSelected) {
                variableLabel.setText("Company Name");
+               System.out.println("company");
            } 
         });
     }
@@ -163,8 +171,8 @@ public class AddPartController implements Initializable {
         try {
             price = parseDouble(partPriceField.getText());
         } catch (NumberFormatException e) {
-            alert.setHeaderText("Price must be in the following format:");
-            alert.setContentText("X.XX");
+            alert.setHeaderText("Price must be in the following format: X.XX");
+            
             Optional<ButtonType> alertOK = alert.showAndWait();
             if(alertOK.isPresent() && alertOK.get() == ButtonType.OK) {
                 alert.close();

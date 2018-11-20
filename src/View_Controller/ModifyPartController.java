@@ -159,8 +159,8 @@ public class ModifyPartController implements Initializable {
             price = parseDouble(partPriceField.getText());
             
         } catch (NumberFormatException e) {
-            alert.setHeaderText("Price must be in the following format:");
-            alert.setContentText("X.XX");
+            alert.setHeaderText("Price must be in the following format: X.XX");
+            
             Optional<ButtonType> alertOK = alert.showAndWait();
             if(alertOK.isPresent() && alertOK.get() == ButtonType.OK) {
                 alert.close();

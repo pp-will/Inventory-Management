@@ -7,6 +7,7 @@ package Model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.TableView;
 
 /**
  *
@@ -24,9 +25,10 @@ public class Inventory {
         products.add(product);
     }
     
-    public static boolean removeProduct(Product product) {
+    public static boolean removeProduct(int index) {
         Inventory.product = product;
-        products.remove(product);
+        products.remove(index);
+        
         return true;
     }
     

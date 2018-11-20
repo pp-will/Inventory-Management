@@ -154,8 +154,8 @@ public class AddProductController implements Initializable {
     void productAddCancelBtnHandler(ActionEvent event) throws IOException{
         try {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Cancel Add Part");
-        alert.setHeaderText("This part will not be added");
+        alert.setTitle("Cancel Add Product");
+        alert.setHeaderText("This product will not be added");
         alert.setContentText("Press OK to Cancel");
         alert.getDialogPane().setPrefSize(350, 200);
         Optional<ButtonType> result = alert.showAndWait();
@@ -170,15 +170,7 @@ public class AddProductController implements Initializable {
             stage.show();
             System.out.println("OK PRESSED");
          } else {
-            /*Stage stage;
-            Parent root;
-            stage = (Stage) productAddCancelBtn.getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("AddProduct.fxml"));
-            root = loader.load();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-            System.out.println("Errror");*/
+            
             alert.close();
         }
         } catch (IOException e) {
@@ -214,8 +206,8 @@ public class AddProductController implements Initializable {
             price = parseDouble(productPriceField.getText());
             //product.setPrice(price);
         } catch (NumberFormatException e) {
-            alert.setHeaderText("Price must be in the following format:");
-            alert.setContentText("X.XX");
+            alert.setHeaderText("Price must be in the following format: X.XX");
+            
             Optional<ButtonType> alertOK = alert.showAndWait();
             if(alertOK.isPresent() && alertOK.get() == ButtonType.OK) {
                 alert.close();

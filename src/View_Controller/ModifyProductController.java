@@ -181,8 +181,8 @@ public class ModifyProductController implements Initializable {
     void productAddCancelBtnHandler(ActionEvent event) throws IOException{
         try {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Cancel Add Part");
-        alert.setHeaderText("This part will not be added");
+        alert.setTitle("Cancel Add Product");
+        alert.setHeaderText("This product will not be added");
         alert.setContentText("Are you ok with this?");
         alert.getDialogPane().setPrefSize(350, 200);
         Optional<ButtonType> result = alert.showAndWait();
@@ -258,8 +258,8 @@ public class ModifyProductController implements Initializable {
             price = parseDouble(productPriceField.getText());
             product.setPrice(price);
         } catch (NumberFormatException e) {
-            alert.setHeaderText("Price must be in the following format:");
-            alert.setContentText("X.XX");
+            alert.setHeaderText("Price must be in the following format: X.XX");
+            
             Optional<ButtonType> alertOK = alert.showAndWait();
             if(alertOK.isPresent() && alertOK.get() == ButtonType.OK) {
                 alert.close();
