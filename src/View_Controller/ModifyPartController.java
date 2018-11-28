@@ -91,7 +91,7 @@ public class ModifyPartController implements Initializable {
     private Part part1;
     private double price;
     private int inventory, min, max, machineID, partID;
-    private String partName;
+    private String partName, companyName;
 
     @FXML
     void modifyPartCancelBtnHandler(ActionEvent event) throws IOException{
@@ -204,77 +204,60 @@ public class ModifyPartController implements Initializable {
             }
         }
         
-        if(inhouseRadio.isSelected()) {
-            variableLabel.setText("Machine ID");
-            
-            try {
-             machineID = parseInt(variableField.getText()); 
-             
-             
-            } catch (NumberFormatException e) {
-                alert.setHeaderText("Machine ID must be an integer");
-            
+        if(max < min) {
+            alert.setHeaderText("Max is less than min");
             Optional<ButtonType> alertOK = alert.showAndWait();
             if(alertOK.isPresent() && alertOK.get() == ButtonType.OK) {
                 alert.close();
             }
-            }
-            if(max < min) {
-                errorLabel.setText("max must be greater than min");
-            } else if (inventory < min || inventory > max || inventory < min && inventory > max) {
+        } else if (inventory < min || inventory > max || inventory < min && inventory > max) {
             alert.setHeaderText("Inventory must be greater than min, and less than max");
             Optional<ButtonType> alertOK = alert.showAndWait();
             if(alertOK.isPresent() && alertOK.get() == ButtonType.OK) {
                 alert.close();
             }
-            
-        } else {
-                alert.setHeaderText("Error:");
-            Optional<ButtonType> alertOK = alert.showAndWait();
-            if(alertOK.isPresent() && alertOK.get() == ButtonType.OK) {
-                alert.close();
-            }
-            } 
-            }else if (outsourcedRadio.isSelected()) {
-            variableLabel.setText("Company Name");
-            if(max < min) {
-                errorLabel.setText("max must be less than min");
-            }
-             
-        } 
+        }
         
         if(conf.isPresent() && conf.get() == ButtonType.OK) {
+           
+           if(inhouseRadio.isSelected()) {
+               
+               try {
+                   machineID = parseInt(variableField.getText());
+               } catch (NumberFormatException e) {
+                   alert.setHeaderText("Machine ID must be an integer");
             
-            if(this.part instanceof Inhouse) {
+                    Optional<ButtonType> alertOK = alert.showAndWait();
+                    if(alertOK.isPresent() && alertOK.get() == ButtonType.OK) {
+                    alert.close();
+                   }
+               }
                 partID = parseInt(partIDLabel.getText());
-                tempIn = (Inhouse)this.part;
-                tempIn.setPartID(partID);
+                //
+                /*tempIn.setPartID(partID);
                 tempIn.setName(partName);
                 tempIn.setPrice(price);
                 tempIn.setInStock(inventory);
                 tempIn.setMin(min);
                 tempIn.setMax(max);
-                tempIn.setMachineID(machineID);
-                //Inhouse inhouse = new Inhouse(partID, partName, price, inventory, min, max, machineID);
-                Inventory.addPart(tempIn);
+                tempIn.setMachineID(machineID);*/
+                Inhouse inhouse = new Inhouse(partID, partName, price, inventory, min, max, machineID);
+                Inventory.addPart(inhouse);
                 
-                
-            } else if (this.part instanceof Outsourced) {
-                tempOut = (Outsourced)this.part;
-                String companyName = variableField.getText();
-                partID = parseInt(partIDLabel.getText());
-                tempOut.setPartID(partID);
+           } else if (outsourcedRadio.isSelected()) {
+               
+               String companyName = variableField.getText();
+               partID = parseInt(partIDLabel.getText());
+               /* tempOut.setPartID(partID);
                 tempOut.setName(partName);
                 tempOut.setPrice(price);
                 tempOut.setInStock(inventory);
                 tempOut.setMin(min);
                 tempOut.setMax(max);
-                tempOut.setCompanyName(companyName);
-                //Outsourced outsourced = new Outsourced(partID, partName, price, inventory, min, max, companyName);
-                Inventory.addPart(tempOut);
-                
-            }
-            
+                tempOut.setCompanyName(companyName);*/
+                Outsourced outsourced = new Outsourced(partID, partName, price, inventory, min, max, companyName);
+                Inventory.addPart(outsourced);
+           } //end of inhouse vs outsourced if/else if
             
             Stage stage;
             Parent root;
@@ -303,20 +286,13 @@ public class ModifyPartController implements Initializable {
 
     @FXML
     void toggleSwitch(ActionEvent event) {
-        ToggleGroup group = new ToggleGroup();
-        inhouseRadio.setToggleGroup(group);
-        outsourcedRadio.setToggleGroup(group);
-        
-        inhouseRadio.selectedProperty().addListener((observable, wasSelected, isSelected) -> {
-           if(isSelected) {
-               variableLabel.setText("Machine ID");
-           } 
-        });
-        outsourcedRadio.selectedProperty().addListener((observable, wasSelected, isSelected) -> {
-           if(isSelected) {
-               variableLabel.setText("Company Name");
-           } 
-        });
+        if(inhouseRadio.isSelected()) {
+          variableLabel.setText("Machine ID");
+          
+      } else if (outsourcedRadio.isSelected()) {
+          variableLabel.setText("Company Name");
+          
+      }
     }
     
     /**

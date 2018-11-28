@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -46,8 +47,11 @@
                      <GridPane.margin>
                         <Insets left="50.0" top="10.0" />
                      </GridPane.margin>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="group" />
+                     </toggleGroup>
                   </RadioButton>
-                  <RadioButton fx:id="outsourcedRadio" mnemonicParsing="false" onAction="#toggleSwitch" text="Outsourced" GridPane.columnIndex="2">
+                  <RadioButton fx:id="outsourcedRadio" mnemonicParsing="false" onAction="#toggleSwitch" text="Outsourced" toggleGroup="$group" GridPane.columnIndex="2">
                      <GridPane.margin>
                         <Insets right="20.0" top="10.0" />
                      </GridPane.margin>

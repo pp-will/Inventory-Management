@@ -126,13 +126,12 @@ public class AddPartController implements Initializable {
     @FXML
     void toggleSwitch(ActionEvent event) {
         
-        ToggleGroup group = new ToggleGroup();
-        inhouseRadio.setToggleGroup(group);
-        inhouseRadio.setUserData("Machine ID");
-        outsourcedRadio.setToggleGroup(group);
-        outsourcedRadio.setUserData("Company Name");
-       
-        inhouseRadio.selectedProperty().addListener((observable, wasSelected, isSelected) -> {
+      if(inhouseRadio.isSelected()) {
+          variableLabel.setText("Machine ID");
+      } else if (outsourcedRadio.isSelected()) {
+          variableLabel.setText("Company Name");
+      }
+        /*inhouseRadio.selectedProperty().addListener((observable, wasSelected, isSelected) -> {
            if(isSelected) {
                variableLabel.setText("Machine ID");
                System.out.println("machine");
@@ -143,7 +142,7 @@ public class AddPartController implements Initializable {
                variableLabel.setText("Company Name");
                System.out.println("company");
            } 
-        });
+        });*/
     }
          
     @FXML
